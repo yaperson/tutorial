@@ -1,0 +1,13 @@
+---
+import BlogPost from '../components/BlogPost.astro';
+import BasedLayout from '../layouts/BaseLayout.astro';
+const allPosts = await Astro.glob('../pages/posts/*.md');
+const nonDraftPosts = allPosts.filter((post) => !post.frontmatter.draft);
+const pageTitle = "Blog";
+---
+<BasedLayout pageTitle={pageTitle}>
+	<h2>Blog</h2>
+	<ul>
+		{allPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title}></BlogPost>)}
+	</ul>
+</BasedLayout>
